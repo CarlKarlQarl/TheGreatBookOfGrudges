@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <link rel="stylesheet" href="index.css">
+        <script defer src="index.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1>Testing Sign-up and Log-in</h1>
+            <div id="signed-up-div" class="signed-logged-div">
+                <h2>User that just signed-up: &nbsp;</h2>
+                <h2 id="signed-up-h2">&nbsp;</h2>
+            </div>
+            <div id="logged-in-div" class="signed-logged-div">
+                <h2>Currently logged in: &nbsp;</h2>
+                <h2 id="logged-in-h2">No one</h2>
+            </div>
+        </header>
+
+        <div class="modal visible" id="splash-image">
+            <img src="thegreatbookofgrudges.jpg" alt="The Great Book of Grudges">
+        </div>
+
+        <main>
+            <div id="form-div" class="modal visible">
+                <div id="sign-up-label-and-form" class="label-and-form">
+                    <label class="form-label">SIGN-UP</label>
+                    <form id="sign-up-form" class="log-sign-form">
+                        <label>Username: </label>
+                        <input type="text" name="username" id="username-sign-input" placeholder="Enter username">
+                        <label>Password: </label>
+                        <input type="text" name="password" id="password-sign-input" placeholder="Enter password">
+                        <input class="submit-button" type="submit" value="SIGN-UP">
+                    </form>
+                </div>
+                
+    
+                <div id="log-in-label-and-form" class="label-and-form">
+                    <label class="form-label">LOG-IN</label>
+                    <form id="log-in-form" class="log-sign-form" >
+                        <label>Username: </label>
+                        <input type="text" name="username" id="username-log-input" placeholder="Enter username">
+                        <label>Password: </label>
+                        <input type="text" name="password" id="password-log-input" placeholder="Enter password">
+                        <input class="submit-button" type="submit" value="LOG-IN">                
+                    </form>
+                </div>
+            </div>
+
+            <button id="log-out-button">LOG-OUT</button>
+
+            <ul id="grudge-ul"></ul>
+
+        </main>
+
+        
+
+        <!-- <div class="modal visible" id="test_modal">
+            <h2>According to all known laws of aviation, there is no way a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don't care what humans think is impossible.</h2>
+            <button id="close-modal-button">Close Modal</button>
+        </div> -->
+
+    </body>
+</html>

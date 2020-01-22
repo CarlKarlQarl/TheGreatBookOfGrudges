@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css?family=New+Rocker&display=swap');
+* {
+    box-sizing: border-box;
+    text-align: center;
+    font-family: 'New Rocker', cursive;
+    color:  hsl(43, 100%, 70%);
+}
+
+.log-sign-form{
+    display: flex;
+    flex-direction: column;
+    border-style: outset;
+    border-color: hsl(43, 100%, 70%);
+}
+
+#grudge-ul{
+    visibility: hidden;
+}
+
+ul {
+    list-style: none;
+    padding: 0px;
+}
+
+li{
+    border-style: solid;
+    margin: 1rem;
+}
+
+.form-label{
+    font-size: 25px;
+    padding: 1rem;
+}
+
+.submit-button{
+    color: black;
+    margin: 5px;
+}
+
+form input{
+    font-size: 17px;
+    margin: 5px;
+}
+
+form label{
+    margin: 5px;
+}
+
+#form-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.label-and-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.modal{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* testing purposes */
+    background-color: hsl(345,100%,25.1%);
+    border-style: double;
+    border-color: hsl(43, 100%, 70%);
+    width: 50%;
+    height: 50%;
+}
+
+#splash-image{
+    top: 24%;
+    left: 21%;    
+}
+
+.visible{
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 2s linear;
+}
+
+.hidden{
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 2s, opacity 1s linear;
+}
