@@ -1,22 +1,18 @@
 const formModal = document.querySelector("#form-div")
 const signUpForm = document.querySelector("#sign-up-form")
 const logInForm = document.querySelector("#log-in-form")
-const signedupH2 = document.querySelector("#signed-up-h2")
-const loggedInH2 = document.querySelector("#logged-in-h2")
+const leftPage = document.querySelector("#left-page")
+const rightPage = document.querySelector("#right-page")
+const backButton = document.querySelector("#back-button")
+const forwardButton = document.querySelector("#forward-button")
 const logOutButton = document.querySelector("#log-out-button")
-const grudgeUL = document.querySelector("#grudge-ul")
 const splashImage = document.querySelector("#splash-image")
 
 let allGrudges = {}
+let displayedGrudges = [0, 1]
 
 retrieveGrudgeList()
 checkWhoIsLoggedIn()
-
-// closeModalButton.addEventListener("click", () => {
-//     testModal.classList.remove("visible")
-//     testModal.classList.add("hidden")
-    
-// })
 
 signUpForm.addEventListener("submit", (event) => {
     event.preventDefault()
@@ -38,7 +34,7 @@ signUpForm.addEventListener("submit", (event) => {
     })
         .then(parseResponse)
         .then(result => {
-            signedupH2.textContent = `${result.message} ${result.user.username}`
+
         })
         .then(signUpForm.reset())
         .catch(error => console.log(error))
@@ -84,14 +80,10 @@ logOutButton.addEventListener("click", () => {
 
 function checkWhoIsLoggedIn(){
     if (localStorage.token){
-        loggedInH2.textContent = localStorage.username
-        grudgeUL.style.visibility = "visible"
         if (localStorage.username == "Thorgrim_Grudgebearer"){
             hideModals()
         }
     } else {
-        loggedInH2.textContent = "No one"
-        grudgeUL.style.visibility = "hidden"
         showModals()
     }
 }
@@ -102,28 +94,8 @@ function retrieveGrudgeList(){
         .then(result => {
             allGrudges = result
         })
-        .then(populateGrudgeUL)
+        .then(loadFirstTwoPages)
         .catch(error => console.log(error))
-}
-
-function populateGrudgeUL(){
-    allGrudges.map(grudge => {
-        makeGrudgeCard(grudge)
-    })
-}
-
-function makeGrudgeCard(grudge){
-    let grudgeLI = document.createElement("li")
-    let grudgeDiv = document.createElement("div")
-    let offenderH3 = document.createElement("H3")
-    let offenseH3 = document.createElement("H3")
-    let descriptionH3 = document.createElement("H3")
-    offenderH3.textContent = `Offender: ${grudge.offender}`
-    offenseH3.textContent = `Offense: ${grudge.offense}`
-    descriptionH3.textContent = `Description: ${grudge.description}`
-    grudgeDiv.append(offenderH3, offenseH3, descriptionH3)
-    grudgeLI.appendChild(grudgeDiv)
-    grudgeUL.appendChild(grudgeLI)
 }
 
 function parseResponse(response){
@@ -142,4 +114,30 @@ function showModals(){
     formModal.classList.add("visible")
     splashImage.classList.remove("hidden")
     splashImage.classList.add("visible")
+}
+
+function loadFirstTwoPages(){
+    firstGrudges = allGrudges.slice(0,2)
+
+    firstGrudges.map((grudge, index) => {
+
+        console.log(index)
+        let grudgeUL = document.createElement("ul")
+        let offenderLI = document.createElement("li")
+        let offenseLI = document.createElement("li")
+        let descriptionLI = document.createElement("li")
+
+        offenderLI.textContent = `Offender: ${grudge.offender}`
+        offenseLI.textContent = `Offense: ${grudge.offense}`
+        descriptionLI.textContent = `Description: ${grudge.description}`
+
+        grudgeUL.append(offenderLI, offenseLI, descriptionLI)
+        if (index == 0){
+            leftPage.appendChild(grudgeUL)
+        } else {
+            rightPage.appendChild(grudgeUL)
+        }
+
+    })
+    
 }

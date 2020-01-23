@@ -6,6 +6,10 @@
     color:  hsl(43, 100%, 70%);
 }
 
+body{
+    background-image: url(./stackstonebackground.jpg);
+}
+
 .log-sign-form{
     display: flex;
     flex-direction: column;
@@ -25,6 +29,7 @@ ul {
 li{
     border-style: solid;
     margin: 1rem;
+    color: hsl(345,100%,25.1%);
 }
 
 .form-label{
@@ -78,11 +83,59 @@ form label{
 .visible{
     visibility: visible;
     opacity: 1;
-    transition: opacity 2s linear;
+    transition: opacity 1s linear;
 }
 
 .hidden{
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s 2s, opacity 1s linear;
+}
+
+#book-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#book{
+    border-style: solid;
+    width: 90vw;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    background-color: hsl(43, 91%, 38%);
+}
+
+.page {
+    border-style: solid;
+    width: 49.75%;
+    height: 100%;
+    background: url(./oldpaper.jpg);
+    background-size: 100% 100%;
+}
+
+#left-page{
+    border-left: double;
+    border-right-width: thin;
+    
+}
+
+#right-page{
+    border-right: double;
+    border-left-width: thin;
+}
+
+#moving-page{
+    border-left: double;
+    border-right: double;
+}
+
+.nav-buttons{
+    outline: none;
+    background-color: transparent;
+    border-style: none;
+    color: hsl(345,100%,25.1%);
+    font-size: 32px;
 }
