@@ -94,7 +94,8 @@ function retrieveGrudgeList(){
         .then(result => {
             allGrudges = result
         })
-        .then(loadFirstTwoPages)
+        // stopped for testing page flip
+        // .then(loadFirstTwoPages)
         .catch(error => console.log(error))
 }
 
