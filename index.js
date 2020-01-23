@@ -94,8 +94,7 @@ function retrieveGrudgeList(){
         .then(result => {
             allGrudges = result
         })
-        // stopped for testing page flip
-        // .then(loadFirstTwoPages)
+        .then(loadFirstTwoPages)
         .catch(error => console.log(error))
 }
 
@@ -138,7 +137,5 @@ function loadFirstTwoPages(){
         } else {
             rightPage.appendChild(grudgeUL)
         }
-
     })
-    
 }
