@@ -1,6 +1,7 @@
 const formModal = document.querySelector("#form-div")
 const signUpForm = document.querySelector("#sign-up-form")
 const logInForm = document.querySelector("#log-in-form")
+const bookContainer = document.querySelector("#book-container")
 const leftPage = document.querySelector("#left-page")
 const rightPage = document.querySelector("#right-page")
 const backButton = document.querySelector("#back-button")
@@ -107,6 +108,8 @@ function hideModals(){
     formModal.classList.add("hidden")
     splashImage.classList.remove("visible")
     splashImage.classList.add("hidden")
+    bookContainer.classList.remove("hidden")
+    bookContainer.classList.add("visible")
 }
 
 function showModals(){
@@ -114,6 +117,8 @@ function showModals(){
     formModal.classList.add("visible")
     splashImage.classList.remove("hidden")
     splashImage.classList.add("visible")
+    bookContainer.classList.remove("visible")
+    bookContainer.classList.add("hidden")
 }
 
 function loadFirstTwoPages(){
