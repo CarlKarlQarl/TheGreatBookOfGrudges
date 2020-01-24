@@ -21,7 +21,7 @@ signUpForm.addEventListener("submit", (event) => {
     let username = signUpFormData.get("username")
     let password = signUpFormData.get("password")
 
-    fetch(`http://localhost:3000/users`, {
+    fetch(`https://dwarven-logins.herokuapp.com/users`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -38,6 +38,7 @@ signUpForm.addEventListener("submit", (event) => {
 
         })
         .then(signUpForm.reset())
+        .then(alert("Successful Sign-up"))
         .catch(error => console.log(error))
 })
 
@@ -47,7 +48,7 @@ logInForm.addEventListener("submit", (event) => {
     let username = logInFormData.get("username")
     let password = logInFormData.get("password")
 
-    fetch(`http://localhost:3000/login`, {
+    fetch(`https://dwarven-logins.herokuapp.com/login`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -79,10 +80,31 @@ logOutButton.addEventListener("click", () => {
     }
 })
 
+forwardButton.addEventListener("click", () => {
+    let newGrudgesToDisplay = displayedGrudges.map(number => 
+        number + 2
+    )
+    displayedGrudges = newGrudgesToDisplay
+    clearPages()
+    loadPages()
+})
+
+backButton.addEventListener("click", () => {
+    let newGrudgesToDisplay = displayedGrudges.map(number => 
+        number - 2
+    )
+    displayedGrudges = newGrudgesToDisplay
+    clearPages()
+    loadPages()
+})
+
 function checkWhoIsLoggedIn(){
     if (localStorage.token){
         if (localStorage.username == "Thorgrim_Grudgebearer"){
             hideModals()
+        } else {
+            alert("Halt, trespasser! The Great Book of Grudges is intended for dwarven eyes only, and the only fitting crime for unauthorized access to the Book is death. However, the executioner is fully booked, so your name will be added to the Book instead.")
+            addUserToBook(localStorage.username)
         }
     } else {
         showModals()
@@ -95,7 +117,8 @@ function retrieveGrudgeList(){
         .then(result => {
             allGrudges = result
         })
-        .then(loadFirstTwoPages)
+        .then(clearPages)
+        .then(loadPages)
         .catch(error => console.log(error))
 }
 
@@ -121,12 +144,10 @@ function showModals(){
     bookContainer.classList.add("hidden")
 }
 
-function loadFirstTwoPages(){
-    firstGrudges = allGrudges.slice(0,2)
+function loadPages(){
+    twoGrudges = allGrudges.slice(displayedGrudges[0], displayedGrudges[1] + 1)
 
-    firstGrudges.map((grudge, index) => {
-
-        console.log(index)
+    twoGrudges.map((grudge, index) => {
         let grudgeUL = document.createElement("ul")
         let offenderLI = document.createElement("li")
         let offenseLI = document.createElement("li")
@@ -143,4 +164,38 @@ function loadFirstTwoPages(){
             rightPage.appendChild(grudgeUL)
         }
     })
+}
+
+function clearPages(){
+    if (leftPage.firstChild){
+        leftPage.firstChild.remove()
+    }
+    if (rightPage.firstChild){
+        rightPage.firstChild.remove()
+    }
+}
+
+function addUserToBook(username){
+    fetch(`https://dwarven-grudges-submitted.herokuapp.com/grudges`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            grudge: {
+                offender: username,
+                offense: "Unauthorized Access",
+                description: "Some human of no import and a strange name attempted to read the Great Book of Grudges. An expedient execution was not available, so a grudge was record instead."
+            }
+        })
+    })
+        .then(retrieveGrudgeList)
+        .then(showBeginningOfBook)
+        .catch(error => console.log(error))
+}
+
+function showBeginningOfBook(){
+    displayedGrudges = [0,1]
+    clearPages()
+    loadPages()
 }
